@@ -4,7 +4,7 @@ import os
 
 API_KEY = os.environ["API_KEY"]
 BASE_URL = os.environ["BASE_URL"]
-user_input = "helsinki"
+user_input = input("Enter city: ")
 LAT = 60.1699
 LON = 24.9384
 
@@ -50,5 +50,4 @@ def page_not_found(error):
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    FLASK_APP.run(debug =  True, host="0.0.0.0", port = port)
+    app.run(host='localhost', port=5000, debug=True)
