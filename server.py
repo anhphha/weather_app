@@ -3,7 +3,7 @@ from flask import Flask, render_template
 import os
 
 API_KEY = os.environ["API_KEY"]
-BASE_URL = os.environ["BASE_URL"]
+BASE_URL = os.environ.get("BASE_URL")
 user_input = "helsinki"
 LAT = 60.1699
 LON = 24.9384
