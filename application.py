@@ -8,15 +8,19 @@ user_input = "helsinki"
 LAT = 60.1699
 LON = 24.9384
 
-FLASK_APP = Flask(__name__, static_url_path="",
+application=Flask(__name__, static_url_path="",
                   static_folder="web/static", template_folder="web/templates")
 
-@FLASK_APP.route('/')
+@application.route('/')
 
 def hello_world():
+<<<<<<< HEAD:server.py
     return render_template('index.html', message="5 Day Weather Forecast")
+=======
+    return render_template('index.html', message="Hello World! ")
+>>>>>>> master:application.py
 
-@FLASK_APP.route('/current')
+@application.route('/current')
 
 def current():
     try:
@@ -37,18 +41,31 @@ def current():
     except requests.exceptions.HTTPError as err:
         return f"Error: {err}"
 
+<<<<<<< HEAD:server.py
 @FLASK_APP.route('/forecast')
+=======
+@application.route('/forecast')
+>>>>>>> master:application.py
 
 def forecast():
     r = requests.get(f'{BASE_URL}/onecall?lat={LAT}&lon={LON}&units=metrics&appid={API_KEY}').json()
     return render_template("index.html", forecast= r["daily"])
 
+<<<<<<< HEAD:server.py
 @FLASK_APP.errorhandler(404)
+=======
+@application.errorhandler(404)
+>>>>>>> master:application.py
 
 def page_not_found(error):
     return render_template("index.html", message=error), 404
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD:server.py
    port = int(os.environ.get("PORT", 5000))
    FLASK_APP.run(debug =  True, host="0.0.0.0", port = port)
+=======
+    port = int(os.environ.get("PORT", 5000))
+    application.run(debug =  True, host="0.0.0.0", port = port)
+>>>>>>> master:application.py
