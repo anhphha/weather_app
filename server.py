@@ -14,7 +14,7 @@ FLASK_APP = Flask(__name__, static_url_path="",
 @FLASK_APP.route('/')
 
 def hello_world():
-    return render_template('index.html', message="Hello World! ")
+    return render_template('index.html', message="5 Day Weather Forecast")
 
 @FLASK_APP.route('/current')
 
@@ -50,5 +50,5 @@ def page_not_found(error):
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    FLASK_APP.run(debug =  True, host="0.0.0.0", port = port)
+   port = int(os.environ.get("PORT", 5000))
+   FLASK_APP.run(debug =  True, host="0.0.0.0", port = port)
