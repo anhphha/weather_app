@@ -37,6 +37,16 @@
         {% include 'forecast.html' %}
         {% endif %}
 
+        <!-- Insert forecast template -->
+        {% if forecast %}
+        {% include 'forecast.html' %}
+        {% endif %}
+
+        <!-- Insert chart -->
+        {% if homepage %}
+        {% include 'homepage.html' %}
+        {% endif %}
+
     </div>
 </body>
 </html>
