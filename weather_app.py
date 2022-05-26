@@ -32,7 +32,7 @@ if unit=='Celsius':
 else:
     unit_c = 'fahrenheit'
 
-def get_temperature():
+def get_temperature(place):
     days = []
     dates = []
     temp_min = []
@@ -86,76 +86,102 @@ def label_xaxis(days):
     plt.xticks(days)
     axes = plt.gca()
     xaxis_format=dates.DateFormatter('%d/%m')
-    axes.xaxis.set_major_formatter(xaxis_format)
+    return axes.xaxis.set_major_formatter(xaxis_format)
 
-def draw_bar_chart():
-    days,temp_min,temp_max = get_temperature()
-    st.title("Temperature Bar Chart")
+def draw_bar_chart(place):
+    days,temp_min,temp_max = get_temperature(place)
+    # st.title("Temperature Bar Chart")
+    print("Temperature Bar Chart")
     fig = plot_temperatures(days, temp_min, temp_max)
-    st.plotly_chart(fig)
-    # st.title("Minimum and Maximum Temperature")
-    # for i in range(0,5):
-    #     st.write("### ", temp_min[i],degree_sign,' --- ',temp_max[i],degree_sign)
-
-def draw_line_chart():
-    days,temp_min,temp_max = get_temperature()
-    st.title("Temperature Line Chart")
-    fig = plot_temperatures_line(days, temp_min, temp_max)
-    st.plotly_chart(fig)
-    # st.title("Minimum and Maximum Temperature")
-    # for i in range(0,5):
-    #     st.write("### ", temp_min[i],degree_sign, " --- ", temp_max[i],degree_sign)
-
-def min_and_max_temp():
-    days,temp_min,temp_max = get_temperature()
+    plot1 = st.plotly_chart(fig)
     st.title("Minimum and Maximum Temperature")
     for i in range(0,5):
-        st.write("### ", temp_min[i],degree_sign, " --- ", temp_max[i],degree_sign)
+         st.write("### ", temp_min[i],degree_sign,' --- ',temp_max[i],degree_sign)
+         return "Minimum and Maximum Temperature" + str(temp_min[i]) + str(degree_sign) + ' --- ' + str(temp_max[i]) + str(degree_sign), fig, plot1
 
-def other_weather_updates():
+def draw_line_chart(place):
+    days,temp_min,temp_max = get_temperature(place)
+    # st.title("Temperature Line Chart")
+    print("Temperature Line Chart")
+    fig = plot_temperatures_line(days, temp_min, temp_max)
+    plot2 = st.plotly_chart(fig)
+    # st.title("Minimum and Maximum Temperature")
+    print("Minimum and Maximum Temperature")
+    for i in range(0,5):
+        # st.write("### ", temp_min[i],degree_sign, " --- ", temp_max[i],degree_sign)
+        return "Minimum and Maximum Temperature: " + str(temp_min[i]) + str(degree_sign) + " --- " + str(temp_max[i]) + str(degree_sign), fig, plot2
+
+def min_and_max_temp(place):
+    days,temp_min,temp_max = get_temperature(place)
+    # st.title("Minimum and Maximum Temperature")
+    for i in range(0,5):
+        # st.write("### ", temp_min[i],degree_sign, " --- ", temp_max[i],degree_sign)
+        return "Minimum and Maximum Temperature in " + place + " is " + str(temp_min[i]) + str(degree_sign) + " --- " + str(temp_max[i]) + str(degree_sign)
+
+def other_weather_updates(place):
     forecaster = mgr.forecast_at_place(place, '3h')
-    st.title('Impending Temperature Changes: ')
+    # st.title('Impending Temperature Changes: ')
     if forecaster.will_have_fog():
-        st.write("### Fog Alert!")
+        # st.write("### Fog Alert!")
+        return'Impending Temperature Changes: ' + "Fog Alert!"
     if forecaster.will_have_rain():
-        st.write(" ### Rain Alert!")
+        # st.write(" ### Rain Alert!")
+        return 'Impending Temperature Changes: ' + "Rain Alert!"
     if forecaster.will_have_storm():
-        st.write(" ### Storm Alert")
+        # st.write(" ### Storm Alert")
+        return 'Impending Temperature Changes: ' + "Storm Alert!"
     if forecaster.will_have_snow():
-        st.write(" ### Snow Alert!")
+        # st.write(" ### Snow Alert!")
+        return 'Impending Temperature Changes: ' + "Snow Alert!"
     if forecaster.will_have_tornado():
-        st.write(" ### Tornado Alert!")
+        # st.write(" ### Tornado Alert!")
+        return 'Impending Temperature Changes: ' + "Tornado Alert!"
     if forecaster.will_have_hurricane():
-        st.write(" ### Hurricane Alert!")
+        # st.write(" ### Hurricane Alert!")
+        return 'Impending Temperature Changes: ' + "Hurricane Alert!"
     if forecaster.will_have_clouds():
-        st.write(" ### Cloudy Skies")
+        # st.write(" ### Cloudy Skies")
+        return 'Impending Temperature Changes: ' + "Cloudy sky"
     if forecaster.will_have_clear():
-        st.write(" ### Clear Weather!")
+        # st.write(" ### Clear Weather!")
+        return 'Impending Temperature Changes: ' + "Clear Weather!"
 
-def cloud_and_wind():
+
+def cloud_and_wind(place):
     obs = mgr.weather_at_place(place)
     weather = obs.weather
     cloud_cov = weather.clouds
     winds=weather.wind()['speed']
-    st.title("Cloud coverage and wind speed")
-    st.write(" ### The current cloud coverage for", place, "is", cloud_cov, "%")
-    st.write(' ### The current wind speed for',place, 'is', winds, 'mph')
+    # st.title("Cloud coverage and wind speed")
+    # st.write(" ### The current cloud coverage for", place, "is", cloud_cov, "%")
+    # st.write(' ### The current wind speed for',place, 'is', winds, 'mph')
+    return "The current cloud coverage for " + place + " is " + str(cloud_cov) + " %", "The current wind speed for " + place + " is " + str(winds) + " mph"
 
-def sunrise_and_sunset():
+
+def sunrise_and_sunset(place):
+    obs=mgr.weather_at_place(place)
+    weather=obs.weather
+    st.title('Sunrise and sunset time: ')
+    finland = pytz.timezone("Europe/Helsinki")
+    sunset = weather.sunset_time(timeformat = "iso")
+    sunrise = weather.sunrise_time(timeformat = "iso")
+    # st.write(" ### Sunrise time in", place, "is", sunrise)
+    # st.write(" ### Sunset time in", place, "is", sunset)
+    return "Sunrise time in " + place + " is " + sunrise, "Sunrise time in " + place + " is " + sunset
+
+def sunrise_and_sunset_test(place):
     obs=mgr.weather_at_place(place)
     weather=obs.weather
     st.title('Sunrise and sunset time: ')
     finland = pytz.timezone("Europe/Helsinki")
     ss = weather.sunset_time(timeformat = "iso")
     sr = weather.sunrise_time(timeformat = "iso")
-    st.write(" ### Sunrise time in", place, "is", sr)
-    st.write(" ### Sunset time in", place, "is", ss)
+    return ss
+    # st.write(" ### Sunrise time in", place, "is", sr)
+    # st.write(" ### Sunset time in", place, "is", ss)
 
-def updates():
-    min_and_max_temp()
-    other_weather_updates()
-    cloud_and_wind()
-    sunrise_and_sunset()
+def updates(place):
+    return min_and_max_temp(place), other_weather_updates(place), cloud_and_wind(place), sunrise_and_sunset(place)
 
 if __name__ == '__main__':
     if st.button("SUBMIT"):
