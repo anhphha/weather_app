@@ -38,7 +38,7 @@ def hello_world():
     weather4 = min_and_max_temp("Helsinki")
     weather5 = draw_line_chart("Helsinki")
     weather6 = draw_bar_chart("Helsinki")
-    return render_template('index.html', homepage=(weather1, weather2, weather3, weather4, weather5, weather6))
+    return render_template('index.html', message=(weather1, weather2, weather3, weather4, weather5, weather6))
 
 
 @application.route('/test')
