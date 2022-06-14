@@ -4,16 +4,15 @@ Python backend communicating with OpenWeather API. HTML + Javascript frontend we
 
 ## Main tasks and lessons learned by doing:
 
+1. Create flask server with outbound api calls to obtain weather information
 
-1.Create flask server with outbound api calls to obtain weather information
+2. Add frontend static content to display weather
 
-2.Add frontend static content to display weather
+3. Create Docker container
 
-3.Create Docker container
+4. Deploy app to Heroku
 
-4.Deploy app to Heroku
-
-5.Continuous deployments with GitHub actions
+5. Continuous deployments with GitHub actions
 
 ## Skills that have been practiced:
 
@@ -31,69 +30,68 @@ Python backend communicating with OpenWeather API. HTML + Javascript frontend we
 6.Bootstrap styling
 
 
-## Final production:
+## :fire: Final production - Proof of Concept:
+
 https://weatherapifinland.herokuapp.com
 
 
 ## Requirements
 
 
-Python
+- Python
 
-Code editor of your choice
+- Code editor of your choice
 
-Virtual environment (optional)
+- Virtual environment (optional)
 
-Docker
+- Docker
 
-Heroku CLI
+- Heroku CLI
 
 ## Helpful Commands
 
-python3 -m venv env
+- `python3 -m venv env`
 
-source ENV/bin/activate
+- `source ENV/bin/activate`
 
-pip install flask requests python-dotenv
+- `pip install flask requests python-dotenv`
 
-pip list
+- `pip list`
 
-export FLASK_ENV=development
+- `export FLASK_ENV=development`
 
-flask run
-
-
-
-pip freeze > requirements.txt
-
-docker build . -t app
-
-docker image ls
-
-docker run -p 5000:5000 --env-file .env app
+- `flask run`
 
 
+### Docker:
+- `pip freeze > requirements.txt`
 
-heroku login
+- `docker build . -t app`
 
-heroku git:remote -a weatherapifinland (to connect heroku app git)
+- `docker image ls`
 
-git add .
+- `docker run -p 5000:5000 --env-file .env app`
 
-git commit -m "added heroku.yml file"
 
-heroku create weatherapifinland (if name is taken, choose another)
+### Heroku
+- `heroku login`
 
-heroku config:set BASE_URL=https://api.openweathermap.org/data/2.5 --app
+- `heroku git:remote -a weatherapifinland` (to connect heroku app git)
 
-weatherapifinland (set environment variables)
+- `git add .`
 
-heroku stack:set container --app weatherapifinland
+- `git commit -m "added heroku.yml file"`
 
-git push heroku master (to Manual push to heroku - not required as we use GitHub actions, after committing your changes to git)
+- `heroku create weatherapifinland` (if name is taken, choose another)
 
-git push --force heroku develop:master (to 'force' push code to heroku when the main code is not at git master/main)
+- `heroku config:set BASE_URL=https://api.openweathermap.org/data/2.5 --app weatherapifinland` (set environment variables)
 
-git push heroku develop:main (to push code to heroku from a git branch without force)
+- `heroku stack:set container --app weatherapifinland`
+
+- `git push heroku master` (to Manual push to heroku - not required as we use GitHub actions, after committing your changes to git)
+
+- `git push --force heroku develop:master` (to 'force' push code to heroku when the main code is not at git master/main)
+
+- `git push heroku develop:main` (to push code to heroku from a git branch without force)
 
 
