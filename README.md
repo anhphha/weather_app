@@ -48,7 +48,7 @@ https://weatherapifinland.herokuapp.com
 
 - Heroku CLI
 
-## Helpful Commands
+## :bulb: Helpful Commands
 
 - `python3 -m venv env`
 
