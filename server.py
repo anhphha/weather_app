@@ -55,4 +55,4 @@ def page_not_found(error):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    FLASK_APP.run(debug =  True, host="0.0.0.0", port = port)
+    FLASK_APP.run(debug=False, host="0.0.0.0", port = port)
